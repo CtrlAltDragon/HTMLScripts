@@ -1,7 +1,8 @@
 // JavaScript source code
-var style = document.createElement('style');
-style.type = 'text/css';
-style.innerHTML = `.carousel {
+window.onload = function () {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    style.innerHTML = `.carousel {
               max-width: 960px;
               text-align: center;
               overflow: hidden;
@@ -154,108 +155,108 @@ style.innerHTML = `.carousel {
                 -webkit-font-smoothing: antialiased;
             }
 `;
-document.getElementsByTagName('head')[0].appendChild(style);
-const XHR = new XMLHttpRequest();
+    document.getElementsByTagName('head')[0].appendChild(style);
+    const XHR = new XMLHttpRequest();
 
-XHR.onreadystatechange = function () {
-    if (this.readyState != 4) return;
+    XHR.onreadystatechange = function () {
+        if (this.readyState != 4) return;
 
-    if (this.status == 200) {
+        if (this.status == 200) {
 
-        const currentDiv = document.getElementById("shopproduct");
-        currentDiv.classList.add('carousel');
+            const currentDiv = document.getElementById("shopproduct");
+            currentDiv.classList.add('carousel');
 
-        var data = JSON.parse(this.responseText);
-        var productlen = data.products.length;
-        var carousel = document.createElement("div");
-        carousel.classList.add("slides");
-        carousel.id = 'slidelist';
-        var aside = document.createElement("aside");
-        aside.classList.add('dotlist');
-        var dotlist = document.createElement("ol");
+            var data = JSON.parse(this.responseText);
+            var productlen = data.products.length;
+            var carousel = document.createElement("div");
+            carousel.classList.add("slides");
+            carousel.id = 'slidelist';
+            var aside = document.createElement("aside");
+            aside.classList.add('dotlist');
+            var dotlist = document.createElement("ol");
 
-        const buttonLeft = document.createElement('button');
-        const buttonRight = document.createElement('button');
-        buttonLeft.classList.add('prevbutton');
-        buttonRight.classList.add('nextbutton');
-        buttonLeft.classList.add('arrow');
-        buttonLeft.classList.add('left');
-        buttonRight.classList.add('arrow');
-        buttonRight.classList.add('right');
-        //buttonLeft.setAttribute('content', "f053");
-        //buttonRight.setAttribute('content', "f054");
-        buttonLeft.addEventListener('click', () => {
-            var toScroll = document.getElementById('slidelist');
-            toScroll.scrollBy(-150, 0);
-        });
-        buttonRight.addEventListener('click', () => {
-            var toScroll = document.getElementById('slidelist');
-            toScroll.scrollBy(150, 0);
-        });
+            const buttonLeft = document.createElement('button');
+            const buttonRight = document.createElement('button');
+            buttonLeft.classList.add('prevbutton');
+            buttonRight.classList.add('nextbutton');
+            buttonLeft.classList.add('arrow');
+            buttonLeft.classList.add('left');
+            buttonRight.classList.add('arrow');
+            buttonRight.classList.add('right');
+            //buttonLeft.setAttribute('content', "f053");
+            //buttonRight.setAttribute('content', "f054");
+            buttonLeft.addEventListener('click', () => {
+                var toScroll = document.getElementById('slidelist');
+                toScroll.scrollBy(-150, 0);
+            });
+            buttonRight.addEventListener('click', () => {
+                var toScroll = document.getElementById('slidelist');
+                toScroll.scrollBy(150, 0);
+            });
 
-        if (productlen > 7) {
-            productlen = 7;
+            if (productlen > 7) {
+                productlen = 7;
+            }
+            for (let i = 0; i < productlen; i++) {
+                var product = data.products[i];
+                var url = "https://shop.mallofamerica.com" + product.url;
+                var slide = document.createElement("div");
+                slide.id = "slide" + i.toString();
+
+                var dot = document.createElement('li');
+
+                var dotlink = document.createElement("a");
+                dotlink.classList.add('navbutton');
+                dotlink.href = "#slide" + i.toString();
+                dot.appendChild(dotlink);
+
+                var dataspan = document.createElement("a");
+                dataspan.href = url;
+                dataspan.style = "text-decoration: none; color: black";
+                var newImg = document.createElement("img");
+                newImg.width = 200;
+                newImg.height = 200;
+                var titlep = document.createElement("p");
+                var shopp = document.createElement("p");
+                var pricep = document.createElement("p");
+                titlep.style = "font-size: 11pt";
+                shopp.style = "font-size: 11pt";
+                pricep.style = "font-size: 11pt";
+                newImg.src = product.image;
+                shopp.innerText = product.store[0];
+                pricep.innerText = "$" + product.price[0];
+                titlep.innerText = product.title;
+
+                dataspan.appendChild(newImg);
+                dataspan.appendChild(titlep);
+                dataspan.appendChild(shopp);
+                dataspan.appendChild(pricep);
+
+                slide.appendChild(dataspan);
+                carousel.appendChild(slide);
+
+                dotlist.appendChild(dot);
+            }
+
+            carousel.appendChild(buttonLeft);
+            carousel.appendChild(buttonRight);
+            aside.appendChild(dotlist);
+            currentDiv.appendChild(carousel);
+            currentDiv.appendChild(aside);
+
+
         }
-        for (let i = 0; i < productlen; i++) {
-            var product = data.products[i];
-            var url = "https://shop.mallofamerica.com" + product.url;
-            var slide = document.createElement("div");
-            slide.id = "slide" + i.toString();
-
-            var dot = document.createElement('li');
-
-            var dotlink = document.createElement("a");
-            dotlink.classList.add('navbutton');
-            dotlink.href = "#slide" + i.toString();
-            dot.appendChild(dotlink);
-
-            var dataspan = document.createElement("a");
-            dataspan.href = url;
-            dataspan.style = "text-decoration: none; color: black";
-            var newImg = document.createElement("img");
-            newImg.width = 200;
-            newImg.height = 200;
-            var titlep = document.createElement("p");
-            var shopp = document.createElement("p");
-            var pricep = document.createElement("p");
-            titlep.style = "font-size: 11pt";
-            shopp.style = "font-size: 11pt";
-            pricep.style = "font-size: 11pt";
-            newImg.src = product.image;
-            shopp.innerText = product.store[0];
-            pricep.innerText = "$" + product.price[0];
-            titlep.innerText = product.title;
-
-            dataspan.appendChild(newImg);
-            dataspan.appendChild(titlep);
-            dataspan.appendChild(shopp);
-            dataspan.appendChild(pricep);
-
-            slide.appendChild(dataspan);
-            carousel.appendChild(slide);
-
-            dotlist.appendChild(dot);
-        }
-
-        carousel.appendChild(buttonLeft);
-        carousel.appendChild(buttonRight);
-        aside.appendChild(dotlist);
-        currentDiv.appendChild(carousel);
-        currentDiv.appendChild(aside);
-
-
     }
+
+    XHR.open('POST', 'https://triplefive-prod-api.mall.adeptmind.ai/search');
+    XHR.setRequestHeader('Content-Type', 'application/json');
+
+    var senddata = JSON.stringify({
+        "query": "",
+        "mall_id": "mall-of-america",
+        "size": 10,
+        "shop_query": "aerie"
+    });
+    XHR.send(senddata);
+    console.log("Sent Post Request");
 }
-
-XHR.open('POST', 'https://triplefive-prod-api.mall.adeptmind.ai/search');
-XHR.setRequestHeader('Content-Type', 'application/json');
-
-var senddata = JSON.stringify({
-    "query": "",
-    "mall_id": "mall-of-america",
-    "size": 10,
-    "shop_query": "aerie"
-});
-XHR.send(senddata);
-console.log("Sent Post Request");
-        }
