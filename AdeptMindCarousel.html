@@ -6,23 +6,29 @@
     <title></title>
 </head>
 <body>
-    <div id="shopproduct">
+    <!--
+        var test = document.getElementById("block-moa-content");
+        test.insertBefore(testdiv,test.firstElementChild.nextSibling); // testdiv should be the list of products
+        -->
+    <div id="shopproduct" style="margin-top: 0">
 
     </div>
 
     <script>
-        window.onload = function(){
+        window.onload = function () {
           var style = document.createElement('style');
           style.type = 'text/css';
           style.innerHTML = `.carousel {
-              max-width: 960px;
+              max-width: 840px;
               text-align: center;
               overflow: hidden;
+              padding-top: 30px;
+              height: 500px;
             }
 
             .slides {
               display: flex;
-              height: 310px;
+              height: 360px;
               overflow-x: auto;
               scroll-snap-type: x mandatory;
               scroll-behavior: smooth;
@@ -33,7 +39,7 @@
               height: 0px;
             }
             .slides::-webkit-scrollbar-thumb {
-              //background: black;
+              /*background: black;*/
               border-radius: 10px;
             }
             .slides::-webkit-scrollbar-track {
@@ -43,11 +49,9 @@
             .slides > div {
               scroll-snap-align: start;
               flex-shrink: 0;
-              width: 300px;
-              height: 300px;
-              margin-right: 20px;
+              width: 280px;
+              height: 360px;
               border-radius: 10px;
-              background: #eee;
               transform-origin: center center;
               transform: scale(1);
               transition: transform 0.5s;
@@ -70,10 +74,13 @@
                     list-style: none;
                     margin: 0rem;
             }
+            .dotlist ol li+li, .dotlist ul li+li {
+                padding-top: 0px;
+            }
             .navbutton {
                 display: inline-block;
-                width: 10px;
-                height: 10px;
+                width: 15px;
+                height: 15px;
                 background-color: #333;
                 background-clip: content-box;
                 border: 0.25rem solid transparent;
@@ -87,7 +94,7 @@
                 display: block;
                 line-height: 0;
                 font-size: 0;
-                top: 155px;
+                top: 50%;
                 width: 20px;
                 height: 20px;
                 padding: 0;
@@ -101,14 +108,52 @@
                 transform: translateY(-50%);
             }
             .nextbutton{
-                left: 96%;
+                left: 0px;
                 position: absolute;
                 display: block;
                 line-height: 0;
                 font-size: 0;
-                top: 155px;
+                top: 50%;
                 width: 20px;
                 height: 20px;
+                padding: 0;
+                border: none;
+                outline: 0;
+                background: 0 0;
+                color: transparent;
+                cursor: pointer;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .prevbuttonctn{
+                left: 2%;
+                position: absolute;
+                display: block;
+                line-height: 0;
+                font-size: 0;
+                top: 50%;
+                width: 30px;
+                height: 100px;
+                padding: 0;
+                border: none;
+                outline: 0;
+                background: 0 0;
+                color: transparent;
+                cursor: pointer;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .nextbuttonctn{
+                left: 820px;
+                position: absolute;
+                display: block;
+                line-height: 0;
+                font-size: 0;
+                top: 50%;
+                width: 30px;
+                height: 100px;
                 padding: 0;
                 border: none;
                 outline: 0;
@@ -132,7 +177,7 @@
               border: solid black;
               border-width: 0 3px 3px 0;
               display: inline-block;
-              opacity: .5;
+              opacity: .6;
               padding: 3px;
             }
             .arrow:hover {
@@ -166,8 +211,97 @@
                 opacity: .75;
                 -webkit-font-smoothing: antialiased;
             }
+            .slidesp {
+                font-family: "Cera Pro",helvetica,arial,sans-serif;
+                font-weight: 300;
+                text-decoration: none;
+                letter-spacing: .025em;
+                font-size: .88889em;
+                font-size: 16px;
+                line-height: 1.38;
+                color: #313131;
+                margin: 0;
+            }
+            .slidesshop {
+                font-family: Bodoni,Bodoni MT,TimesNewRoman,Times New Roman,Times,Baskerville,Georgia,serif;
+                font-weight: 700;
+                text-decoration: none;
+                font-size: 25px;
+                font-size: 1.38889em;
+                line-height: 1.16;
+                color: #313131;
+                letter-spacing: 0;
+                -webkit-font-smoothing: antialiased;
+                margin: 0;
+            }
+            .slide {
+
+            }
+            .slide:hover {
+                margin-top: -12px;
+                -webkit-box-shadow: 0 10px 10px rgb(49 49 49 / 5%);
+                box-shadow: 0 10px 10px rgb(49 49 49 / 5%);
+            }
+            .ctaarrow {
+                width: 13px;
+                height: 13px;
+                position: relative;
+                top: .11em;
+            }
+            .buynow {
+                padding-top: 10px;
+                font-family: Interstate,helvetica,arial,sans-serif;
+                font-weight: 700;
+                font-size: 12px;
+                font-size: .66667em;
+                text-decoration: none;
+                letter-spacing: .25em;
+                text-transform: uppercase;
+            }
+
+            @media (max-width: 830px) {
+              .carousel {
+                max-width: 560px;
+              }
+              .nextbutton {
+                left: 0px;
+              }
+              .nextbuttonctn {
+                left: 540px;
+              }
+            }
+            @media (max-width: 550px) {
+              .carousel {
+                max-width: 280px;
+                width: 280px;
+              }
+              .carousel > img {
+                display: initial;
+              }
+              .nextbutton {
+                left: 0px;
+              }
+              .nextbuttonctn {
+                left: 255px;
+              }
+            }
+            @media (300px <= width <= 550px) {
+              .carousel {
+                max-width: 280px;
+                width: 280px;
+              }
+              .slide > img {
+                display: initial;
+              }
+              .nextbutton {
+                left: 0px;
+              }
+              .nextbuttonctn {
+                left: 255px;
+              }
+            }
 `;
-          document.getElementsByTagName('head')[0].appendChild(style);
+            document.getElementsByTagName('head')[0].appendChild(style);
             const XHR = new XMLHttpRequest();
 
           XHR.onreadystatechange = function () {
@@ -186,7 +320,12 @@
               var aside = document.createElement("aside");
               aside.classList.add('dotlist');
               var dotlist = document.createElement("ol");
+              dotlist.style = "padding-left: 0;";
 
+              const btnContainerL = document.createElement('a');
+              const btnContainerR = document.createElement('a');
+              btnContainerL.classList.add('prevbuttonctn');
+              btnContainerR.classList.add('nextbuttonctn');
               const buttonLeft = document.createElement('button');
               const buttonRight = document.createElement('button');
               buttonLeft.classList.add('prevbutton');
@@ -195,13 +334,11 @@
               buttonLeft.classList.add('left');
               buttonRight.classList.add('arrow');
               buttonRight.classList.add('right');
-              //buttonLeft.setAttribute('content', "f053");
-              //buttonRight.setAttribute('content', "f054");
-              buttonLeft.addEventListener('click', () => {
+              btnContainerL.addEventListener('click', () => {
                   var toScroll = document.getElementById('slidelist');
                   toScroll.scrollBy(-150, 0);
               });
-              buttonRight.addEventListener('click', () => {
+              btnContainerR.addEventListener('click', () => {
                   var toScroll = document.getElementById('slidelist');
                   toScroll.scrollBy(150, 0);
               });
@@ -214,6 +351,7 @@
                 var url = "https://shop.mallofamerica.com" + product.url;
                 var slide = document.createElement("div");
                 slide.id = "slide" + i.toString();
+                slide.classList.add('slide');
 
                 var dot = document.createElement('li');
                 
@@ -228,21 +366,48 @@
                 var newImg = document.createElement("img");
                 newImg.width = 200;
                 newImg.height = 200;
+                newImg.style = "Display: initial";
                 var titlep = document.createElement("p");
                 var shopp = document.createElement("p");
                 var pricep = document.createElement("p");
-                titlep.style = "font-size: 11pt";
-                shopp.style = "font-size: 11pt";
-                pricep.style = "font-size: 11pt";
+
+
+                  var calltoaction = document.createElement('span');
+                  var svgns = "http://www.w3.org/2000/svg";
+                  var ctaarrow = document.createElementNS(svgns, 'svg');
+                  calltoaction.style = "margin: 0 5px 0 0; font-weight: bold;";
+                  calltoaction.innerText = "Buy Now!"
+                  ctaarrow.classList.add('ctaarrow');
+                  ctaarrow.setAttribute('xmlns', "http://www.w3.org/2000/svg");
+                  ctaarrow.setAttribute('data-name', "Layer 1");
+                  ctaarrow.setAttribute('viewBox', "0 0 18 18");
+                  ctaarrow.setAttribute('width', "18");
+                  var path = document.createElementNS(svgns,'path');
+                  path.setAttribute('fill', "#000");
+                  path.setAttribute('fill-rule', "evenodd");
+                  path.setAttribute('d', "M9 0a9 9 0 1 0 9 9 9 9 0 0 0-9-9zM8 15l-1.5-1.5L11 9 6.5 4.49 8 3l6 6z");
+                  ctaarrow.appendChild(path);
+
+
+                var buynow = document.createElement("p");
+                titlep.classList.add('slidesp');
+                shopp.classList.add('slidesshop');
+                pricep.classList.add('slidesp');
+                buynow.classList.add('slidesp');
+                buynow.classList.add('buynow');
                 newImg.src = product.image;
                 shopp.innerText = product.store[0];
                 pricep.innerText = "$"+product.price[0];
                 titlep.innerText = product.title;
+                buynow.appendChild(calltoaction);
+                buynow.appendChild(ctaarrow);
 
                 dataspan.appendChild(newImg);
-                dataspan.appendChild(titlep);
                 dataspan.appendChild(shopp);
-                dataspan.appendChild(pricep);
+                dataspan.appendChild(titlep);
+                
+                  dataspan.appendChild(pricep);
+                  dataspan.appendChild(buynow);
 
                 slide.appendChild(dataspan);
                 carousel.appendChild(slide);
@@ -250,12 +415,21 @@
                 dotlist.appendChild(dot);
               }
 
-              carousel.appendChild(buttonLeft);
-              carousel.appendChild(buttonRight);
+              btnContainerL.appendChild(buttonLeft);
+              btnContainerR.appendChild(buttonRight);
+              carousel.appendChild(btnContainerL);
+              carousel.appendChild(btnContainerR);
               aside.appendChild(dotlist);
               currentDiv.appendChild(carousel);
               currentDiv.appendChild(aside);
-              
+
+                var shopall = document.createElement('a');
+                shopall.classList.add('button');
+                shopall.classList.add('button__icon--arrow-right');
+                shopall.innerText = "Shop All";
+                shopall.style = "padding-left: 40px";
+                shopall.href = "https://shop.mallofamerica.com/store/" + product.store[0];
+                currentDiv.appendChild(shopall);
 
             }
           }
